@@ -106,6 +106,8 @@ dataset_info.json文件内容如图
 
 此时加入的"kefu"即为我们的数据集 ``` "file_name" ``` 参数设置为kefu.json的文件路径。``` "formatting" ``` 设置为格式，图中由于```kefu,json```是alpaca格式的，因此设置为 ``` "formatting":"alpaca" ``` 
 
+``` "kefu" ``` 注册完成后，在训练配置中设置 ``` dataset: kefu  ```  时候会自动查找 ``` LLaMA-Factory/data/dataset_info.json ``` 文件看是否有注册 ``` "kefu" ``` 如果有注册就会读取他的数据集文件路径，如果没有注册则会找不到数据集路径报错。
+
 ## 三.微调模型选取过程
 
 ### 第一步：选择合适的模型
@@ -165,7 +167,27 @@ llamafactory-cli train my_yaml/train.yaml #使用自己的配置参数训练
 
 ### 第一步：修改推理文件
 
-推理阶段进入文件夹 ``` LLaMA-Factory/example/inference/llama3_lora_sft.yaml ```
+推理阶段进入文件夹 ``` LLaMA-Factory/example/inference/llama3_lora_sft.yaml ``` 
+
+这边建议和训练阶段一样创建一个 ``` my_chat ``` 把llama3_lora_sft.yaml拷贝为chat.yaml。再在文件夹用来放置 ``` chat.yaml ``` 文件
+
+![image](5.png)
+
+这边可以修改的参数：
+``` model_name_or_path: ``` 为模型的路径，和训练阶段的一样，这边设置好了为 ``` model/Qwen3-0.6B ```。
+
+``` adapter_name_or_path: ``` lora参数块的路径，即为训练阶段的output_dir ``` saves/Qwen3-0.6B/lora/sft  ```
+
+``` template: ``` 要和训练时候一致，这边为 ``` default ``` .
+
+### 第二步：执行chat命令
+
+如果这边已经有了my_chat这个文件夹后，执行
+```
+llmafactory-cli chat my_chat/chat.yaml #直接新建立文件夹
+llmafactory-cli chat examples/inference/llama3_lora_sft.yaml #没有新建文件夹利用已有的
+```
+
 
 
 
