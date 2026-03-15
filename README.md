@@ -108,7 +108,15 @@ dataset_info.json文件内容如图
 
 ## 三.微调模型选取过程
 
-### 第一步：选择合适的微调
+### 第一步：选择合适的模型
+
+可在modelscope网站下载预训练好的权重。
+登录界面
+``` https://www.modelscope.cn/models ```
+
+
+
+### 第二步：选择合适的微调
 
 常见的微调有：全量微调，冻结微调，lora微调等
 
@@ -119,6 +127,21 @@ dataset_info.json文件内容如图
 在这里推荐把 ``` llama3_lora_sft.yaml ``` 复制一遍放到自己的 ``` my_yawm ``` 文件夹下面，后续可在自己文件夹下修改参数配置。
 
 此时在文件夹 ``` my_data/train.yawl ``` 下的内容为：
+![image](3.png)
+
+``` model_name_or_path ``` 为你的预训练模型的地址，可以是本地的也可以是网络下载的，只需调整 ``` trust_remote_code: true ``` 即可自己下载。
+
+``` dataset: identity,alpaca_en_demo ``` 在这个配置中要把刚刚我们注册的数据集kefu放进去，也就是
+``` dataset: identity,alpaca_en_demo,kefu ``` 。
+
+``` template: default ``` 要根据不同的模型修改，在Qwen3模型中为defalut即可。
+
+``` output_dir: saves/Qwen3-0.6B/lora/sft ``` 也就是训练好的存放地址。如果没有这个文件夹会对应创建文件夹。
+
+其他参数在后续进行微调的配置时候再次细讲！！！
+
+
+
 
 
 
