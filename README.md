@@ -33,6 +33,7 @@ sh install.sh
 可先在LLaMA-Factory文件夹下创建文件夹my_data用来存放自己的微调数据集
 假设创建数据集为```my_data/kefu.json```
 这边kefu.json内容的格式常见的有两种，分别为``` alpaca,sharegpt```
+
 alpaca格式为：
 ```
 [
@@ -91,7 +92,8 @@ sharegpt格式为：
 pip install modelscope -i https://mirrors.aliyun.com/pypi/simple/
 modelscope download --dataset Moemuu/Muice-Dataset --local_dir my_data
 ```
-其中--dataset后的参数为下载的名字，比如下图![image](2.png)
+其中--dataset后的参数为下载的名字，比如只需把下图红框复制下来即可![image](2png.png)
+
 
 ### 第二步：注册数据集
 
@@ -106,7 +108,17 @@ dataset_info.json文件内容如图
 
 ## 三.微调模型选取过程
 
-### 第一步：
+### 第一步：选择合适的微调
 
-常见的微调有
+常见的微调有：全量微调，冻结微调，lora微调等
+
+在这里使用lora微调，模型为Qwen3-0.6B-base
+
+打开文件夹 ``` LLaMA-Factory/examples/train_lora/llama3_lora_sft.yaml ``` 。后续参数在此基础下调整
+
+在这里推荐把 ``` llama3_lora_sft.yaml ``` 复制一遍放到自己的 ``` my_yawm ``` 文件夹下面，后续可在自己文件夹下修改参数配置。
+
+此时在文件夹 ``` my_data/train.yawl ``` 下的内容为：
+
+
 
