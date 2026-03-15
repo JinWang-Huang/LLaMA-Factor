@@ -112,9 +112,17 @@ dataset_info.json文件内容如图
 
 可在modelscope网站下载预训练好的权重。
 登录界面
+
 ``` https://www.modelscope.cn/models ```
 
-
+找到想要的模型，比如这边找Qwen3的模型，如图所示：
+![image](4.png)
+同理复制图片的路径 ``` Qwen/Qwen3-0.6B ```
+下载指令为：
+```
+modelscope --model Qwen/Qwen3-0.6B --local_dir model/Qwen3-0.6B
+```
+下载完成后在 ``` LLaMA-Factory/model/Qwen3-0.6B ``` 文件夹下便可看到，后续的配置过程模型路径便可选这个。
 
 ### 第二步：选择合适的微调
 
@@ -131,6 +139,8 @@ dataset_info.json文件内容如图
 
 ``` model_name_or_path ``` 为你的预训练模型的地址，可以是本地的也可以是网络下载的，只需调整 ``` trust_remote_code: true ``` 即可自己下载。
 
+根据下载的模型，我们这边设置 ``` model_name_or_path:../model/Qwen3-0.6B ```
+
 ``` dataset: identity,alpaca_en_demo ``` 在这个配置中要把刚刚我们注册的数据集kefu放进去，也就是
 ``` dataset: identity,alpaca_en_demo,kefu ``` 。
 
@@ -138,8 +148,24 @@ dataset_info.json文件内容如图
 
 ``` output_dir: saves/Qwen3-0.6B/lora/sft ``` 也就是训练好的存放地址。如果没有这个文件夹会对应创建文件夹。
 
+```  do_train:true ``` 默认为true，如果为false则不实际训练，主要用来检测数据集是否没问题。
+
 其他参数在后续进行微调的配置时候再次细讲！！！
 
+### 第三步：开始进行微调
+
+执行代码
+```
+llamafactory-cli h #这个可以知道llamafactory-cli有哪些功能
+llamafactory-cli train my_yaml/train.yaml #使用自己的配置参数训练
+
+```
+
+## 四.推理以及后续工作
+
+### 第一步：修改推理文件
+
+推理阶段进入文件夹 ``` LLaMA-Factory/example/inference/llama3_lora_sft.yaml ```
 
 
 
