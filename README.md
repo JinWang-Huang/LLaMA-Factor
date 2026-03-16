@@ -51,16 +51,18 @@ alpaca格式为：
 ```
 sharegpt格式为：
 ```
-{
+[
+ {
   #数据1
-  "conversations": [
+  "conversations":
+   [
     {
       "from": "human",
       "value": "如何修改账户密码？"
     },
     {
       "from": "gpt",
-      "value": "您好，修改密码的步骤如下：\n1. 登录账户\n2. 进入设置页面\n3. 点击修改密码\n4. 按照提示完成修改"
+      "value": "您好，修改密码的步骤如下：\n1. 登录账户\n2. 进入设置页面\n3. 点击修改密码\n4"
     },
     {
       "from": "human",
@@ -71,15 +73,17 @@ sharegpt格式为：
       "value": "如果忘记密码，请点击登录页面的“忘记密码”链接，通过手机或邮箱验证后重置密码。"
     }
   ]
+},
   #数据2
-   "conversations": [
+  { "conversations": [
                         {
                         "from": "human",
                         "value":"xxxxx"
                         }
 `                        ....
-                    ]
-}
+                     ]
+   }
+]
 ```
 因此获取数据集的方式如下：
 
